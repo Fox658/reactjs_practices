@@ -7,6 +7,7 @@ class StarWars extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loadeCharacter: false,
       name: null,
       heigth: null,
       homworld: null,
@@ -18,6 +19,7 @@ class StarWars extends React.Component {
     console.log("Get new character from a button");
     this.setState(
       {
+        loadeCharacter: true,
         name: "Pablo hurt",
         heigth: 176,
         homworld: "Toto.in",
@@ -30,12 +32,17 @@ class StarWars extends React.Component {
   render() {
     return (
     <div>
-      <h1>{this.state.name}</h1>
-      <p>Height cm: {this.state.heigth}</p>
-      <p>Homeworld: {this.state.homworld}</p>
-      <ul>
-        <li>{this.state.films}</li>
-      </ul>
+      {
+        this.state.loadeCharacter &&
+        <div>
+          <h1>{this.state.name}</h1>
+          <p>{this.state.heigth}cm</p>
+          <p>Homeworld: {this.state.homworld}</p>
+          <ul>
+            <li>{this.state.films}</li>
+          </ul>
+        </div>
+      }
       <button 
         type="button" 
         onClick={() => this.getNewCharacter()} 
