@@ -9,7 +9,7 @@ class Item extends React.Component {
   }
 
   clickMe = () => {
-    this.setState(prev => ({ count: prev.count + 1 }));
+    this.setState({ count: this.state.count + 1 });
   };
 
   render() {
