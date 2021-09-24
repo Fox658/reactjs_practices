@@ -9,24 +9,31 @@ class StarWars extends React.Component {
     this.state = {
       loadeCharacter: false,
       name: null,
-      heigth: null,
-      homworld: null,
+      height: null,
+      homeworld: null,
       films: [],
 
     }
   }
   getNewCharacter() {
     console.log("Get new character from a button");
-    this.setState(
-      {
-        loadeCharacter: true,
-        name: "Pablo hurt",
-        heigth: 176,
-        homworld: "Toto.in",
-        films: ["dadass","yolo 2077", "call of cien fuegos"],
-  
-      }
-    );
+    const randomNumber = Math.round(Math.random() * 82);
+    const url = `https://swapi.dev/api/people/${randomNumber}/`;//atleast 82
+    fetch(url)
+      .then( res => res.json())
+      .then(data => {
+        this.setState(
+          {
+            loadeCharacter: true,
+            name: data.name ,
+            height: data.height,
+            homeworld: data.homeworld,
+            films: data.films,
+      
+          }
+        );
+        console.log(data);
+      });
   }
 
   render() {
@@ -36,8 +43,8 @@ class StarWars extends React.Component {
         this.state.loadeCharacter &&
         <div>
           <h1>{this.state.name}</h1>
-          <p>{this.state.heigth}cm</p>
-          <p>Homeworld: {this.state.homworld}</p>
+          <p>{this.state.height}cm</p>
+          <p>Homeworld: {this.state.homeworld}</p>
           <ul>
             <li>{this.state.films}</li>
           </ul>
